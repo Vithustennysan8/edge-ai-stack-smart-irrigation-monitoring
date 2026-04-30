@@ -110,7 +110,8 @@ void loop() {
   // "moisture": 512,
   // "temperature": 25,
   // "humidity": 60,
-  // "prediction": "Soil OK"
+  // "prediction": "Soil OK",
+  // "alert": "true"
   // }
 
   Serial.println("send: " + payload);
