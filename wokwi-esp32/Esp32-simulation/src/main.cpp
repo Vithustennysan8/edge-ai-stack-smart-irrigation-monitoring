@@ -101,7 +101,7 @@ void loop() {
   // "prediction": "Soil OK"
   // }
 
-  Serial.println("Mengirim: " + payload);
+  Serial.println("send: " + payload);
 
   // 🔹 Publish to MQTT
   client.publish("plant/monitor", payload.c_str());

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "author": "Ribka",
+  "author": "Vithushan E.T.L.",
   "editor": "wokwi",
   "parts": [
     { "type": "board-esp32-devkit-c-v4", "id": "esp1", "top": 102, "left": 187.84, "attrs": {} },
@@ -20,7 +20,9 @@
     [ "led1:C", "esp1:GND.1", "black", [ "v0" ] ],
     [ "pot1:GND", "esp1:GND.1", "black", [ "v105.6", "h124.8", "v9.6" ] ],
     [ "pot1:SIG", "esp1:34", "green", [ "v0" ] ],
-    [ "pot1:VCC", "esp1:3V3", "red", [ "v0" ] ]
+    [ "pot1:VCC", "esp1:3V3", "red", [ "v0" ] ],
+    [ "esp1:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp1:RX", "$serialMonitor:TX", "", [] ]
   ],
   "dependencies": {}
 }
