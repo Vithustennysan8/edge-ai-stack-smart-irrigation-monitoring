@@ -72,9 +72,15 @@ void loop() {
 
   // 🔹 Read moisture sensor
   int moistureValue = analogRead(moisturePin);
+  int temperatureValue = random(28, 38);
+  int humidityValue = random(30, 70);
 
   Serial.print("Moisture Value: ");
   Serial.println(moistureValue);
+  Serial.print("Temperature Value: ");
+  Serial.println(temperatureValue);
+  Serial.print("Humidity Value: ");
+  Serial.println(humidityValue);
 
   // 🔹 Decision Logic (Temporary - Replace with ML later)
   String prediction;
@@ -89,15 +95,21 @@ void loop() {
     digitalWrite(ledPin, LOW);   // Turn OFF LED
   }
 
+
   // 🔹 Prepare JSON payload
   String payload = "{";
   payload += "\"moisture\": " + String(moistureValue) + ",";
-  payload += "\"prediction\": \"" + prediction + "\"";
+  payload += "\"temperature\": " + String(temperatureValue) + ",";
+  payload += "\"humidity\": " + String(humidityValue) + ",";
+  payload += "\"prediction\": \"" + prediction + "\",";
+  payload += "\"alert\": " + String((moistureValue < threshold) ? "true" : "false");
   payload += "}";
 
   // json template 
   // {
   // "moisture": 512,
+  // "temperature": 25,
+  // "humidity": 60,
   // "prediction": "Soil OK"
   // }
 
