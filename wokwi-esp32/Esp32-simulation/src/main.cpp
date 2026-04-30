@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
 
@@ -80,9 +81,11 @@ void loop() {
 
   if (moistureValue < threshold) {
     prediction = "Needs Water";
+    Serial.println("Moisture level is low. Please water the plant.");
     digitalWrite(ledPin, HIGH);  // Turn ON LED
   } else {
     prediction = "Soil OK";
+    Serial.println("Moisture level is sufficient.");
     digitalWrite(ledPin, LOW);   // Turn OFF LED
   }
 
