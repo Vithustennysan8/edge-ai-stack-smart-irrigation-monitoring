@@ -1,0 +1,782 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "tab1",
+        "type": "tab",
+        "label": "Smart Irrigation Flow",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ui_tab1",
+        "type": "ui_tab",
+        "name": "Edge AI Irrigation Dashboard",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ui_group1",
+        "type": "ui_group",
+        "name": "Real-Time Monitoring",
+        "tab": "ui_tab1",
+        "order": 1,
+        "disp": true,
+        "width": 19,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a80fe1546baccb46",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#2e7d32",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#097479",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0eb8c0",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Edge AI Smart Irrigation Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 40,
+                "sy": 40,
+                "gx": 20,
+                "gy": 20,
+                "cx": 4,
+                "cy": 4,
+                "px": 15,
+                "py": 15
+            }
+        }
+    },
+    {
+        "id": "67e6780084831011",
+        "type": "mqtt-broker",
+        "name": "HiveMQ Broker",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "42f2c18b2239b26c",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 1,
+        "width": 19,
+        "height": 1
+    },
+    {
+        "id": "a04fa27d205c5878",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "ae6575ae9867afc1",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 4,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "e7c2bd9101aeddb9",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "57847dab9628367e",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 7,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "09c1ae1cb8c4104d",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 8,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "341e6f11c5bac636",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 9,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "269fd4101e0fa58e",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 10,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "889689805fd0c93c",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 12,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "197c70df9c5be0e9",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 13,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "0d4a8c90f79ce5da",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 14,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "f20c9a50eacb8724",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 15,
+        "width": 19,
+        "height": 1
+    },
+    {
+        "id": "b6e768668db3f9e0",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 16,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "b703d416d4ee1fc9",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 18,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "4cfc24f008eb8496",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 20,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "33932bbf7f7ec4d9",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 21,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "ee47a9c506beac59",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 22,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "a1e52183628d7e2e",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 23,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "2880b28b0162315e",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 24,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "cca2d2b25d2e4880",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 25,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "975ff79f4473e357",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 26,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "15eaaa2d7f641462",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 27,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "514cd358cadb033d",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 28,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "9f038005f3349a64",
+        "type": "ui_spacer",
+        "z": "tab1",
+        "name": "spacer",
+        "group": "ui_group1",
+        "order": 29,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "3cc11d24.ff01a2",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
+        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "gauge1",
+        "type": "ui_gauge",
+        "z": "tab1",
+        "name": "Moisture Gauge",
+        "group": "ui_group1",
+        "order": 3,
+        "width": 8,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Soil Moisture %",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ef4444",
+            "#f59e0b",
+            "#22c55e"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 920,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "text1",
+        "type": "ui_text",
+        "z": "tab1",
+        "group": "ui_group1",
+        "order": 5,
+        "width": 7,
+        "height": 1,
+        "name": "Prediction",
+        "label": "🤖AI Prediction",
+        "format": "{{payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 900,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "text2",
+        "type": "ui_text",
+        "z": "tab1",
+        "group": "ui_group1",
+        "order": 11,
+        "width": 7,
+        "height": 1,
+        "name": "Alert",
+        "label": "🚨System Alert",
+        "format": "{{payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1050,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "17c74d72170932b7",
+        "type": "mqtt in",
+        "z": "tab1",
+        "name": "",
+        "topic": "plant/monitor",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "67e6780084831011",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "1739c62b148c0664"
+            ]
+        ]
+    },
+    {
+        "id": "1739c62b148c0664",
+        "type": "json",
+        "z": "tab1",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 330,
+        "y": 100,
+        "wires": [
+            [
+                "0f97a2a7944ba272",
+                "9be34905d7b7dc5a",
+                "fb479e651e61c847",
+                "68faa38d08776b64",
+                "60fa99ac190bbb1a",
+                "8af779619f8d513c"
+            ]
+        ]
+    },
+    {
+        "id": "0f97a2a7944ba272",
+        "type": "change",
+        "z": "tab1",
+        "name": "Extract Prediction",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.prediction",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 260,
+        "wires": [
+            [
+                "text1"
+            ]
+        ]
+    },
+    {
+        "id": "9be34905d7b7dc5a",
+        "type": "debug",
+        "z": "tab1",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "fb479e651e61c847",
+        "type": "function",
+        "z": "tab1",
+        "name": "Convert Moisture %",
+        "func": "msg.payload = ((msg.payload.moisture / 4095) * 100);\nmsg.payload = Math.round(msg.payload);  \nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 60,
+        "wires": [
+            [
+                "gauge1"
+            ]
+        ]
+    },
+    {
+        "id": "68faa38d08776b64",
+        "type": "change",
+        "z": "tab1",
+        "name": "Extract Alert",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.alert",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 340,
+        "wires": [
+            [
+                "2b3a3c422cd7e9f1"
+            ]
+        ]
+    },
+    {
+        "id": "2b3a3c422cd7e9f1",
+        "type": "function",
+        "z": "tab1",
+        "name": "Format Alert Message",
+        "func": "if (msg.payload === true) {\n    msg.payload = \" Water Needed\";\n} else {\n    msg.payload = \" Soil Healthy\";\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 340,
+        "wires": [
+            [
+                "text2"
+            ]
+        ]
+    },
+    {
+        "id": "c44508134dab9f2c",
+        "type": "ui_gauge",
+        "z": "tab1",
+        "name": "",
+        "group": "ui_group1",
+        "order": 17,
+        "width": 8,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Temperature °C",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 920,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "60fa99ac190bbb1a",
+        "type": "change",
+        "z": "tab1",
+        "name": "Extract Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 120,
+        "wires": [
+            [
+                "c44508134dab9f2c"
+            ]
+        ]
+    },
+    {
+        "id": "7f25b781321d3267",
+        "type": "ui_gauge",
+        "z": "tab1",
+        "name": "",
+        "group": "ui_group1",
+        "order": 19,
+        "width": 8,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Humidity %",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 910,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8af779619f8d513c",
+        "type": "change",
+        "z": "tab1",
+        "name": "Extract Humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.humidity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 180,
+        "wires": [
+            [
+                "7f25b781321d3267"
+            ]
+        ]
+    },
+    {
+        "id": "034a19555551aec9",
+        "type": "inject",
+        "z": "tab1",
+        "name": "Inject node",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"moisture\": 1200,   \"temperature\": 29,   \"humidity\": 70,   \"prediction\": \"Soil OK\",   \"alert\": false }",
+        "payloadType": "json",
+        "x": 160,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e26977358b1c05d0",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
