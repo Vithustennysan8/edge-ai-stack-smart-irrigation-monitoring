@@ -1,6 +1,10 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
+#include <math.h>
+
+// 🔹 Include generated model
+#include "model_lr.h"
 
 // WiFi & MQTT
 const char* ssid = "Wokwi-GUEST";
@@ -10,40 +14,47 @@ const char* mqtt_server = "broker.hivemq.com";
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-// Pin Definitions
-int moisturePin = 34;   // Analog pin for moisture sensor
-int ledPin = 4;         // indicator LED
+// Pins
+int moisturePin = 34;
+int ledPin = 4;
 
-// Threshold (adjust based on calibration)
-int threshold = 400;
-
-// Callback (receive commands)
-void callback(char* topic, byte* payload, unsigned int length) {
-  String message = "";
-  for (int i = 0; i < length; i++) {
-    message += (char)payload[i];
-  }
-
-  Serial.print("Incoming messages [");
-  Serial.print(topic);
-  Serial.print("]: ");
-  Serial.println(message);
+// 🔹 Sigmoid function
+float sigmoid(float x) {
+  return 1.0 / (1.0 + exp(-x));
 }
 
-// Reconnect to MQTT
+// 🔹 Prediction function (Logistic Regression)
+float predict(float m, float t, float h) {
+  // Normalize inputs
+  float nm = (m - MOISTURE_MEAN) / MOISTURE_STD;
+  float nt = (t - TEMP_MEAN) / TEMP_STD;
+  float nh = (h - HUMIDITY_MEAN) / HUMIDITY_STD;
+
+  // Linear combination
+  float z = W1 * nm + W2 * nt + W3 * nh + BIAS;
+
+  // Sigmoid output
+  return sigmoid(z);
+}
+
+// MQTT callback
+void callback(char* topic, byte* payload, unsigned int length) {
+  Serial.print("Incoming message: ");
+  for (int i = 0; i < length; i++) {
+    Serial.print((char)payload[i]);
+  }
+  Serial.println();
+}
+
+// MQTT reconnect
 void reconnect() {
   while (!client.connected()) {
     Serial.print("Connecting to MQTT...");
-    String clientId = "ESP32-Moisture-";
-    clientId += String(random(0xffff), HEX);
-
-    if (client.connect(clientId.c_str())) {
-      Serial.println("Connect!");
+    if (client.connect("ESP32-Plant")) {
+      Serial.println("Connected!");
     } else {
-      Serial.print("Failed, rc=");
-      Serial.print(client.state());
-      Serial.println("try again in 5 seconds");
-      delay(5000);
+      Serial.println("Retrying...");
+      delay(3000);
     }
   }
 }
@@ -52,95 +63,64 @@ void setup() {
   Serial.begin(115200);
   pinMode(ledPin, OUTPUT);
 
+  // WiFi
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
+    delay(300);
     Serial.print(".");
   }
-
   Serial.println("\nWiFi Connected");
 
+  // MQTT
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
 }
 
 void loop() {
-  if (!client.connected()) {
-    reconnect();
-  }
+  if (!client.connected()) reconnect();
   client.loop();
 
-  // 🔹 Read moisture sensor
-  int moistureValue = analogRead(moisturePin);
-  int temperatureValue = random(28, 38);
-  int humidityValue = random(30, 70);
+  // high temp (~34–35°C) + low humidity (~40%) → Needs Water
+  // lower temp (~26–28°C) + higher humidity (~60–70%) → Soil OK
+  // 🔹 Read sensor (simulated in Wokwi)
+  int moisture = analogRead(moisturePin);
+  float temp = random(34, 38);
+  float humidity = random(40, 70);
 
-  Serial.print("Moisture Value: ");
-  Serial.println(moistureValue);
-  Serial.print("Temperature Value: ");
-  Serial.println(temperatureValue);
-  Serial.print("Humidity Value: ");
-  Serial.println(humidityValue);
+  Serial.println("\n--- SENSOR DATA ---");
+  Serial.print("Moisture: "); Serial.println(moisture);
+  Serial.print("Temp: "); Serial.println(temp);
+  Serial.print("Humidity: "); Serial.println(humidity);
 
-  // 🔹 Decision Logic (Temporary - Replace with ML later)
+  // 🔹 ML Prediction
+  float result = predict(moisture, temp, humidity);
+
   String prediction;
 
-  if (moistureValue < threshold) {
+  if (result > 0.5) {
     prediction = "Needs Water";
-    Serial.println("Moisture level is low. Please water the plant.");
-    digitalWrite(ledPin, HIGH);  // Turn ON LED
+    digitalWrite(ledPin, HIGH);
   } else {
     prediction = "Soil OK";
-    Serial.println("Moisture level is sufficient.");
-    digitalWrite(ledPin, LOW);   // Turn OFF LED
+    digitalWrite(ledPin, LOW);
   }
 
+  Serial.print("Prediction Score: ");
+  Serial.println(result);
+  Serial.println("Prediction: " + prediction);
 
-  // 🔹 Prepare JSON payload
+  // 🔹 JSON payload
   String payload = "{";
-  payload += "\"moisture\": " + String(moistureValue) + ",";
-  payload += "\"temperature\": " + String(temperatureValue) + ",";
-  payload += "\"humidity\": " + String(humidityValue) + ",";
+  payload += "\"moisture\": " + String(moisture) + ",";
+  payload += "\"temperature\": " + String(temp) + ",";
+  payload += "\"humidity\": " + String(humidity) + ",";
   payload += "\"prediction\": \"" + prediction + "\",";
-  payload += "\"alert\": " + String((moistureValue < threshold) ? "true" : "false");
+  payload += "\"alert\": " + String((result > 0.5) ? "true" : "false");
   payload += "}";
 
-  // json template 
-  // {
-  // "moisture": 512,
-  // "temperature": 25,
-  // "humidity": 60,
-  // "prediction": "Soil OK",
-  // "alert": "true"
-  // }
+  Serial.println("Sending: " + payload);
 
-  Serial.println("send: " + payload);
-
-  // 🔹 Publish to MQTT
   client.publish("plant/monitor", payload.c_str());
 
-  delay(2000);
-
-  /*
-  ============================================================
-  🔮 TinyML Model Implementation (Currently Disabled)
-  ============================================================
-
-  // Example flow:
-
-  // 1. Normalize input
-  float input = moistureValue / 1023.0;
-
-  // 2. Run inference
-  float output = runModel(input);  // Your TinyML function
-
-  // 3. Interpret result
-  if (output > 0.5) {
-      prediction = "Needs Water";
-  } else {
-      prediction = "Soil OK";
-  }
-
-  ============================================================
-  */
+  delay(5000);
 }
